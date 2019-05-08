@@ -3,7 +3,7 @@
 const Like = use('App/Models/LikePost')
 
 class LikePostController {
-  async store ({ params, request, auth }) {
+  async store ({ params, auth }) {
     try {
       const like = await Like.findByOrFail({
         post_id: params.posts_id,

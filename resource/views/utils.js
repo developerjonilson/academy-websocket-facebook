@@ -37,7 +37,13 @@ function ajax (url, data, method = 'post') {
       dataType: 'json',
       data
     })
+      .done(data => resolve(data))
+      .fail(e => reject(e))
   })
+}
+
+function $likes (likes, type = 'post') {
+  $(`span[data-${type}-id="${likes.id}"]`).text(likes.count)
 }
 
 // let online

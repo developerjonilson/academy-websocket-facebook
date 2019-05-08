@@ -4,6 +4,7 @@
   const posts = ws.subscribe('posts')
 
   posts.on('new', post => $('.posts').prepend(Template.post(post)))
+  posts.on('likes', likes => $likes(likes))
 
   ajax('/posts', null, 'get')
     .then(posts => {
@@ -27,6 +28,12 @@
     })
 
     $('.posts').prepend(Template.post(post))
+  })
+
+  $('body').on('click', '.like-post', async function (e) {
+    e.preventDefault()
+    const id = $(this).data('id')
+    const likes = await ajax(`/posts/${id}/likes`)
   })
 })(jQuery)
 

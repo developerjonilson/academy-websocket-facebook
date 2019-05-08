@@ -10,7 +10,7 @@ PostHook.sendWs = async post => {
   const topic = Ws.getChannel('posts').topic('posts')
 
   if (topic) {
-    await post.load(['user', 'comments'])
+    await post.loadMany(['user', 'comments'])
     topic.broadcast('new', post)
   }
 }
