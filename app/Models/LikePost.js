@@ -6,7 +6,10 @@ class LikePost extends Model {
   static boot () {
     super.boot()
 
-    this.addHook('afterCreate', 'LikePostHook.sendWs')
+    this.addHook('afterCreate', [
+      'LikePostHook.sendWs',
+      'LikePostHook.notifyUser'
+    ])
     this.addHook('afterDelete', 'LikePostHook.sendWs')
   }
 
